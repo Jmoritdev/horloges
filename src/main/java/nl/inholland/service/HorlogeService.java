@@ -3,9 +3,12 @@ package nl.inholland.service;
 import nl.inholland.model.Horloge;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class HorlogeService {
@@ -17,12 +20,10 @@ public class HorlogeService {
     }
 
     public Horloge getHorloge(int id){
-        for(Horloge h : horloges){
-            if(h.getId().equals(id)){
-                return h;
-            }
-        }
-        return null;
+        return horloges
+                .stream()
+                .filter(horloge -> horloge.getId() == id)
+                .findFirst().get();
     }
 
     public void addHorloge(Horloge h){
