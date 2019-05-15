@@ -2,30 +2,36 @@ package nl.inholland.model;
 
 import org.apache.tomcat.jni.Local;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
+@Entity
 public class Horloge {
 
-    private Integer id;
+    @GeneratedValue
+    @Id
+    private long id;
+
     private String brand;
     private String name;
     private Period batteryLife;
     private LocalDateTime lastRecharged;
 
-    public Horloge(Integer id, String brand, String name, Period batteryLife, LocalDateTime lastRecharged){
-        this.id = id;
+    public Horloge(String brand, String name, Period batteryLife, LocalDateTime lastRecharged){
         this.brand = brand;
         this.name = name;
         this.batteryLife = batteryLife;
         this.lastRecharged = lastRecharged;
     }
 
-    public Horloge(Integer id, String brand, String name){
-        this.id = id;
+    public Horloge(String brand, String name){
         this.brand = brand;
         this.name = name;
         this.batteryLife = Period.ofYears(1);
@@ -34,12 +40,8 @@ public class Horloge {
 
     public Horloge(){}
 
-    public Integer getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getBrand() {

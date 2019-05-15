@@ -1,6 +1,7 @@
 package nl.inholland.service;
 
 import nl.inholland.model.Horloge;
+import nl.inholland.repository.HorlogeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Null;
@@ -13,21 +14,25 @@ import java.util.stream.Stream;
 @Service
 public class HorlogeService {
 
-    List<Horloge> horloges = new ArrayList<Horloge>();
+    private HorlogeRepository repository;
+
+    public HorlogeService(HorlogeRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Horloge> getHorloges(){
-        return horloges;
+        return (List<Horloge>) repository.findAll();
     }
 
-    public Horloge getHorloge(int id){
-        return horloges
-                .stream()
-                .filter(horloge -> horloge.getId() == id)
-                .findFirst().get();
+    public Horloge getHorloge(long id){
+        return repository.findById(id).orElse(null);
     }
 
-    public void addHorloge(Horloge h){
+    public void saveHorloge(Horloge h){
+        repository.save(h);
+    }
 
-        horloges.add(h);
+    public void deleteHorloge(long id){
+        repository.deleteById(id);
     }
 }

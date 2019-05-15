@@ -16,38 +16,40 @@ public class HorlogeController {
 
     public HorlogeController(HorlogeService service) {
         this.service = service;
-        service.addHorloge(new Horloge(1, "Bolex", "Marina"));
-        service.addHorloge(new Horloge(2, "Disney", "Mickey Mouse Deluxe"));
-        service.addHorloge(new Horloge(3, "Lotus", "Supreme"));
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Horloge> getHorloges() {
-
         return service.getHorloges();
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addHorloge(@RequestBody Horloge horloge) {
-
-        service.addHorloge(horloge);
+    @PostMapping
+    public void saveHorloge(@RequestBody Horloge horloge) {
+        service.saveHorloge(horloge);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Horloge getHorlogeById(@PathVariable int id) {
+    @DeleteMapping(value = "/{id}")
+    public void deleteHorloge(@PathVariable long id) {
+        service.deleteHorloge(id);
+    }
 
+    @GetMapping(value = "/{id}")
+    public Horloge getHorlogeById(@PathVariable int id) {
         return service.getHorloge(id);
     }
 
-    @RequestMapping(value = "{id}/batteryLeft", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{id}/batteryLeft")
     public long getBatteryLife(@PathVariable int id) {
-
         return service.getHorloge(id).getBatteryLeft();
     }
 
-    @RequestMapping(value = "{id}/recharge", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean recharge(@PathVariable int id) {
+    @PutMapping
+    public void updateHorloge(@RequestBody Horloge horloge) {
+        service.saveHorloge(horloge);
+    }
 
+    @GetMapping(value = "{id}/recharge")
+    public boolean recharge(@PathVariable int id) {
         return service.getHorloge(id).rechargeBattery();
     }
 
