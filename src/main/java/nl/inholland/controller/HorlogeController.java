@@ -3,6 +3,7 @@ package nl.inholland.controller;
 
 import nl.inholland.model.Horloge;
 import nl.inholland.service.HorlogeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class HorlogeController {
         return service.getHorloges();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void saveHorloge(@RequestBody Horloge horloge) {
         service.saveHorloge(horloge);

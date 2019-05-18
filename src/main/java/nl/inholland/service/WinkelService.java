@@ -1,6 +1,5 @@
 package nl.inholland.service;
 
-import nl.inholland.model.Horloge;
 import nl.inholland.model.Winkel;
 import nl.inholland.repository.WinkelRepository;
 import org.springframework.stereotype.Service;
