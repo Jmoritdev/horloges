@@ -36,19 +36,19 @@ public class App
 //        };
 //    }
 
-//    @Bean
-//    ApplicationRunner runner2(HorlogeRepository repository) {
-//
-//        return args -> {
-//            Arrays.asList(
-//                    new Horloge("Bolex", "Marina"),
-//                    new Horloge("Disney", "Mickey Mouse Deluxe"),
-//                    new Horloge("Lotus", "Supreme")
-//            ).forEach(horloge -> repository.save(horloge));
-//
-//            repository.findAll().forEach(System.out::println);
-//        };
-//    }
+    @Bean
+    ApplicationRunner runner2(HorlogeRepository repository) {
+
+        return args -> {
+            Arrays.asList(
+                    new Horloge("Bolex", "Marina"),
+                    new Horloge("Disney", "Mickey Mouse Deluxe"),
+                    new Horloge("Lotus", "Supreme")
+            ).forEach(horloge -> repository.save(horloge));
+
+            repository.findAll().forEach(System.out::println);
+        };
+    }
 
 }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horloge Api</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var url = "horloges/";
+
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                var horloge = {
+                    "brand": $("#brand").val(),
+                    "model": $("#name").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(horloge),
+                    contentType: "application/json",
+                    success: function (success) {
+                        $("#result").text((succes));
+                    }
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+<header>
+    <h1>Horloges</h1>
+</header>
+<h2>Create horloge</h2>
+<form>
+
+    <input name="brand" id="brand" maxlength="50" placeholder="brand"><br>
+    <input name="name" id="name" maxlength="50" placeholder="name"><br>
+
+    <button name="submit" id="submit">submit</button><br>
+    <div id="result" name="result"></div>
+
+
+</form>
+</body>
+</html>
